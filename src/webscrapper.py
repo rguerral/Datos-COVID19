@@ -57,14 +57,27 @@ def writer(fileprefix, mylist):
         for element in mylist:
             wr.writerow(element)
 
-
+def get_sochimi(sochimiURL):
+    page = requests.get(sochimiURL)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    table = soup.find(lambda tag: tag.name == 'table')
+    rows = table.findAll(lambda tag: tag.name == 'tr')
+    data_sochimi = []
+    for row in rows:
+        cols = row.findAll('td')
+        cols = [ele.text.strip().replace('–', '0') for ele in cols]
+        data_sochimi.append([unidecode.unidecode(' '.join(ele.replace('.', '').replace(":", "").split())) for ele in cols if ele])
+    return(data_sochimi)
 
 if __name__ == '__main__':
-    test = False
+    test = True
     if test:
         myMinsal = get_minsal('https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/')
         for element in myMinsal:
             print (element)
+        mySochimi = get_sochimi('https://www.medicina-intensiva.cl/site/post_covid.php?id=5')
+        for element in mySochimi:
+            print(element)
     else:
         writer('CasosConfirmados-totalRegional',
                get_minsal('https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/'))
