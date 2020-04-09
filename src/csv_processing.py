@@ -27,6 +27,8 @@ from shutil import copyfile
 
 
 if __name__ == '__main__':
+    # Aqui se generan los productos 1 y 2
+
     copyfile("../input/Covid-19.csv", "../output/producto1/Covid-19.csv")
 
     dates = []
@@ -44,7 +46,7 @@ if __name__ == '__main__':
             reader2 = csv.reader(csvfile, delimiter=',')
             next(reader2) # skip the header
 
-            output = "../output/producto2/CasosConfirmados-" + eachdate.replace('/', '-') + ".csv"
+            output = "../output/producto2/" + eachdate + "-CasosConfirmados.csv"
             print("dumping " + eachdate + " to " + output)
             for row in reader2:
                 newrow = []
