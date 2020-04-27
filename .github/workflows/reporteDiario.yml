@@ -43,5 +43,14 @@ jobs:
           committer: minciencia github bot <actions@github.com>
           reviewers: pdaire, fzmolina, raliaga, dna33, scornejo, MinCiencia
           base: master
-
+      
+      
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@master
+      env:
+            SLACK_CHANNEL: github-notifications
+            SLACK_MESSAGE: ‘Hemos generado los productos del recurso diario’
+            SLACK_TITLE: ‘update_en_COVID19’
+            SLACK_USERNAME: ‘gitbot’
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
