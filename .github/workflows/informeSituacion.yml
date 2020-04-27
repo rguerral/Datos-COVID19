@@ -45,3 +45,11 @@ jobs:
           base: master
 
 
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@master
+      env:
+            SLACK_CHANNEL: github-notifications
+            SLACK_MESSAGE: ‘Hemos generado los productos a partir del informe de situacion COVID19’
+            SLACK_TITLE: ‘update_en_COVID19’
+            SLACK_USERNAME: ‘gitbot’
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}

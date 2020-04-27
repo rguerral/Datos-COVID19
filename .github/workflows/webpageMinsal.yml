@@ -51,4 +51,11 @@ jobs:
         commit_user_email: actions@github.com
         commit_author: minciencia github bot <actions@github.com>
 
-
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@master
+      env:
+            SLACK_CHANNEL: github-notifications
+            SLACK_MESSAGE: ‘Hemos generado los productos a partir del webpage del MINSAL’
+            SLACK_TITLE: ‘update_en_COVID19’
+            SLACK_USERNAME: ‘gitbot’
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
