@@ -310,7 +310,7 @@ def prod3_13_14(fte):
 
 if __name__ == '__main__':
 
-    #prod4('https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/', '../output/producto4/')
+    prod4('https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/', '../output/producto4/')
     #prod5('https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/', '../output/producto5/')
 
 
@@ -322,6 +322,6 @@ if __name__ == '__main__':
     #exec(open('bulk_producto4.py').read())
 
     print('Generando productos 3, 13 y 14')
-    #prod3_13_14('../output/producto4/')
+    prod3_13_14('../output/producto4/')
 
 
