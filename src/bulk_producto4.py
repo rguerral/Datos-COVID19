@@ -19,7 +19,6 @@ for file in glob.glob("../output/producto4/*.csv"):
     date = re.search("\d{4}-\d{2}-\d{2}", file).group(0).replace("-", "/")
     df = pd.read_csv(file, sep=",", encoding="utf-8")
     df.columns = df.columns.str.replace(" ", "")
-
     # Estandarización de nombres de columnas
     if "Casosfallecidos" in list(df):
         df = df.rename(columns={"Casosfallecidos": "Fallecidos"})
@@ -28,12 +27,16 @@ for file in glob.glob("../output/producto4/*.csv"):
         df["Fallecidos"] = 0
 
     if "Región" in list(df):
-        df = df.rename(columns={"Región": "Region"})
+        df = df.rename(columns={"Región": "Region"}, inplace=True)
 
     df["Fecha"] = date
 
     df = df.rename(columns={"Casosnuevos": "Nuevos Casos",
-                            "Casostotales": "Casos Confirmados"})
+                            "Casostotales": "Casos Confirmados",
+                            "Casosnuevosconsintomas": "Casos Nuevos con Sintomas",
+                            "Casosnuevossinsintomas": "Casos Nuevos sin Sintomas",
+                            "Casostotalesacumulados": "Casos Totales Acumulados",
+                            "Incrementodiario": "Incremento Diario"})
 
     # Elimina la filas "total"
     df = df[df["Region"] != "Total"]
@@ -52,13 +55,15 @@ data = data.drop(columns={"%Casostotales**", "Casosrecuperados"})
 data["Region"] = data.apply(lambda x: " ".join(x["Region"].split()), axis=1)
 data["Region"] = data["Region"].replace({"Tarapaca": "Tarapacá", "Valparaiso": "Valparaíso", "Metropolita": "Metropolitana",
                                          "O'Higgins": "O’Higgins", "Nuble": "Ñuble", "Biobio": "Biobío", "Los Rios": "Los Ríos",
-                                         "Araucania": "Araucanía", "Aysen": "Aysén", "Arica y Paricota": "Arica y Parinacota"
+                                         "Araucania": "Araucanía", "Aysen": "Aysén", "Arica y Paricota": "Arica y Parinacota",
+                                         "O’Higgins": "O’Higgins"
                                          })
+print(data.columns)
 # Crea el identificador regional
 data["Region ID"] = data["Region"].replace(regions_id)
-
+print(data['Region'].to_string())
 # Crea columna con la población regional
-data["Poblacion"] = data["Region"].replace(regions_pob).astype(int)
+data["Poblacion"] = data["Region"].replace(regions_pob).astype(float)
 
 # Obtiene la tasa de contagios cada 100 mil habitantes
 data["Tasa"] = (data["Casos Confirmados"]/data["Poblacion"])*100000
