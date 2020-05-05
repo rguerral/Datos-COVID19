@@ -45,6 +45,7 @@ def prod1(fte, producto):
     df = pd.read_csv(fte, dtype={'Codigo region': object, 'Codigo comuna': object})
     df.dropna(how='all', inplace=True)
     utils.regionName(df)
+    utils.comunaName(df)
     # Drop filas de totales por region
     todrop = df.loc[df['Comuna'] == 'Total']
     df.drop(todrop.index, inplace=True)
