@@ -1,7 +1,7 @@
 # DP20 - Ventiladores a nivel nacional: Descripción
 Este producto da cuenta del número total de ventiladores en el Sistema Integrado Covid 19, el número de ventiladores disponibles y el número de ventiladores ocupados, para cada fecha reportada.  Se concatena la historia de los reportes diarios publicados por el Ministerio de Salud del país.
 
-Se entiende por número total a todos los ventiladores operativos en el Sistema Integrado Covid 19.
+Se entiende por número total a todos los ventiladores operativos en el Sistema Integrado Covid 19, y por ocupados aquellos que sean  usados por pacientes confirmados o bien por pacientes con otras enfermedades.
 
 # Columnas y valores
 En archivo NumeroVentiladores.csv, contiene las columnas 'Estado' (con valores total, disponibles, ocupados), una serie de columnas '[Fecha]', donde en cada una están los valores reportados a nivel nacional. El archivo NumeroVentiladores_T.csv es la versión traspuesta (serie de tiempo) del primer archivo. Todos estos valores están separados entre sí por comas (csv).
