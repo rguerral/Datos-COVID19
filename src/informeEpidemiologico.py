@@ -103,21 +103,23 @@ def prod15(fte, producto):
 def prod15Nuevo(fte, prod):
     data = []
     for file in glob.glob(fte + '/*FechaInicioSintomas.csv'):
-        date = re.search("\d{4}-\d{2}-\d{2}", file).group(0)
-        df = pd.read_csv(file, sep=",", encoding="utf-8", dtype={'Codigo region': object, 'Codigo comuna': object})
-        df.dropna(how='all', inplace=True)
-        # Drop filas de totales por region
-        todrop = df.loc[df['Comuna'] == 'Total']
-        df.drop(todrop.index, inplace=True)
-        # Hay semanas epi que se llam S en vez de SE
-        for eachColumn in list(df):
+        print(file)
+        if file != fte + 'FechaInicioSintomas.csv': 
+          date = re.search("\d{4}-\d{2}-\d{2}", file).group(0)
+          df = pd.read_csv(file, sep=",", encoding="utf-8", dtype={'Codigo region': object, 'Codigo comuna': object})
+          df.dropna(how='all', inplace=True)
+          # Drop filas de totales por region
+          todrop = df.loc[df['Comuna'] == 'Total']
+          df.drop(todrop.index, inplace=True)
+          # Hay semanas epi que se llam S en vez de SE
+          for eachColumn in list(df):
             if re.search("S\d{2}", eachColumn):
                 print("Bad name " + eachColumn)
                 df.rename(columns={eachColumn: eachColumn.replace('S', 'SE')}, inplace=True)
-        # insert publicacion as column 5
-        #df['Publicacion'] = date
-        df.insert(loc=5, column='Publicacion', value=date)
-        data.append(df)
+          # insert publicacion as column 5
+          #df['Publicacion'] = date
+          df.insert(loc=5, column='Publicacion', value=date)
+          data.append(df)
 
     #normalization
     data = pd.concat(data)
