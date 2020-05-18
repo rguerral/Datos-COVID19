@@ -30,11 +30,19 @@ import pandas as pd
 
 def regionName(df):
     df["Region"] = df["Region"].replace({"Tarapaca": "Tarapacá", "Valparaiso": "Valparaíso",
-                                         "Del Libertador General Bernardo O’Higgins": "O’Higgins", "Nuble": "Ñuble",
-                                         "Biobio": "Biobío", "La Araucania": "Araucanía", "Los Rios": "Los Ríos",
-                                         "Aysen": "Aysén", "Magallanes y la Antartica": "Magallanes"
+                                         "Región Metropolitana de Santiago": "Metropolitana",
+                                         "Del Libertador General Bernardo O’Higgins": "O’Higgins",
+                                         "Libertador General Bernardo OHiggins": "O’Higgins",
+                                         "Nuble": "Ñuble",
+                                         "Biobio": "Biobío", "Concepción": "Biobío",
+                                         "La Araucania": "Araucanía", "la Araucanía": "Araucanía",
+                                         "Los Rios": "Los Ríos", "de Los Ríos": "Los Ríos",
+                                         "Aysen": "Aysén", "Aysén del General Carlos Ibañez del Campo": "Aysén",
+                                         "Magallanes y la Antartica": "Magallanes",
+                                         "Magallanes y de la Antártica Chilena": "Magallanes"
                                          })
 
+<<<<<<< HEAD
 def comunaName(df):
     df["Comuna"] = df["Comuna"].replace({"Camina": "Camiña", "Ollague": "Ollagüe", "Maria Elena": "María Elena",
                                          "Copiapo": "Copiapó", "Chanaral": "Chañaral", "Vicuna": "Vicuña",
@@ -66,6 +74,11 @@ def comunaName(df):
                                          "Chillan": "Chillán", "Chillan Viejo": "Chillán Viejo", "Quillon": "Quillón",
                                          "Niquen": "Ñiquén", "San Fabian": "San Fabián", "San Nicolas": "San Nicolás"
                                          })
+=======
+def regionNameRegex(df):
+    df['Region'] = df['Region'].replace(regex=True, to_replace=r'.*Región de ', value=r'')
+    df['Region'] = df['Region'].replace(regex=True, to_replace=r'.*Región del ', value=r'')
+>>>>>>> master
 
 def transpone_csv(csvfile):
     df = pd.read_csv(csvfile)
