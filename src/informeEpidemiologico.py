@@ -270,7 +270,7 @@ def prod33(fte, producto):
     df = pd.read_csv(fte)
     df.to_csv(producto + '.csv', index=False)
     df_t = df.T
-    df_t.to_csv(producto + '_T.csv', index=False)
+    df_t.to_csv(producto + '_T.csv', header=False)
     identifiers = ['Comorbilidad']
     variables = [x for x in df.columns if x not in identifiers]
     df_std = pd.melt(df, id_vars=identifiers, value_vars=variables, var_name='Fecha', value_name='Porcentaje')
