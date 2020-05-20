@@ -304,5 +304,5 @@ if __name__ == '__main__':
     prod28Nuevo('../input/InformeEpidemiologico/', '../output/producto28/FechaInicioSintomas_reportadosSEREMIHistorico')
 
     print('Generando producto 33')
-    prod33('../input/InformeEpidemiologico/ComorbilidadCasosConfirmados.csv', '../output/producto33/ComorbilidadCasosConfirmados')
+    prod33('../input/InformeEpidemiologico/ComorbilidadSinHospitalizacion.csv', '../output/producto33/ComorbilidadSinHospitalizacion')
     prod33('../input/InformeEpidemiologico/ComorbilidadHospitalizados.csv', '../output/producto33/ComorbilidadHospitalizados')
