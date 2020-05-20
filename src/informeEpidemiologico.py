@@ -33,6 +33,7 @@ Los productos que salen del informe epidemiologico son:
 19
 25
 28
+33
 """
 
 import utils
@@ -264,6 +265,17 @@ def prod28Nuevo(fte, prod):
                      value_name='Casos confirmados')
     df_std.to_csv(prod.replace('Historico', '_std.csv'), index=False)
 
+def prod33(fte, producto):
+
+    df = pd.read_csv(fte)
+    df.to_csv(producto + '.csv', index=False)
+    df_t = df.T
+    df_t.to_csv(producto + '_T.csv', index=False)
+    identifiers = ['Comorbilidad']
+    variables = [x for x in df.columns if x not in identifiers]
+    df_std = pd.melt(df, id_vars=identifiers, value_vars=variables, var_name='Fecha', value_name='Porcentaje')
+    df_std.to_csv(producto + '_std.csv', index=False)
+
 
 if __name__ == '__main__':
 
@@ -290,3 +302,7 @@ if __name__ == '__main__':
 
     print('Generando producto 28')
     prod28Nuevo('../input/InformeEpidemiologico/', '../output/producto28/FechaInicioSintomas_reportadosSEREMIHistorico')
+
+    print('Generando producto 33')
+    prod33('../input/InformeEpidemiologico/ComorbilidadCasosConfirmados.csv', '../output/producto33/ComorbilidadCasosConfirmados')
+    prod33('../input/InformeEpidemiologico/ComorbilidadHospitalizados.csv', '../output/producto33/ComorbilidadHospitalizados')
